@@ -21,7 +21,6 @@ var vcxconfig = require('./vcxconfig')
 var bodyParser = require('body-parser')
 
 
-
 // Initialization of basic HTTP / HTTPS Service
 
 var server;
@@ -51,11 +50,9 @@ app.set('port', port);
 server.listen(port);
 
 
-
 console.log("Server started. Listening on Port " + port);
 server.on('error', onError);
 server.on('listening', onListening);
-
 
 
 // Utility Function: Sanitizing Configured Port No.
@@ -99,7 +96,6 @@ function onError(error) {
 }
 
 
-
 // Function: To confirm Service is listening on the configured Port
 
 function onListening() {
@@ -121,7 +117,6 @@ app.use(morgan('dev'));
 app.use(express.static(vcxconfig.clientPath));
 
 
-
 // Application Server Route Definitions - These functions communicate with EnableX Server API
 // Route: To get liist of all Rooms in your Application
 
@@ -134,25 +129,34 @@ app.get('/getAllRooms', function (req, res) {
 });
 
 
-
 // Route: To get information of a given room.
 
 app.get('/getRoom/:roomName', function (req, res) {
     var room = req.params.roomName;
-    vcxroom.getRoom(room, function (data) {
+    vcxroom.getRoom(room, function (status,data) {
         res.status(200);
         res.send(data);
     });
 });
-
 
 
 // Route: To get Token for a Room
 
 app.post('/createToken/', function (req, res) {
-    vcxroom.getToken(req.body, function (data) {
+    vcxroom.getToken(req.body, function (status,data) {
         res.status(200);
         res.send(data);
     });
 });
-``
+
+
+app.post('/createRoom/', function (req, res) {
+    vcxroom.createRoom(function (status, data) {
+        res.send(data);
+        res.status(200);
+
+    });
+});
+
+
+

@@ -1,10 +1,10 @@
-# Sample Web App - With EnableX Web Toolkit
+# 1-to-1 RTC: A Sample Web App with EnableX Web Toolkit
 
-The Sample Web App demonstrates the use of APIs for EnableX platform. The main motivation behind this application is to demonstrate usage of APIs and allow developers to ramp up on app by hosting on their own devices instead of directly using servers.
+The Sample Web App demonstrates the use of APIs for EnableX platform to carry out 1-to-1 RTC (Real Time Communication). The main motivation behind this application is to demonstrate usage of APIs and allow developers to ramp up on app by hosting on their own devices instead of directly using servers.
 
-RTC (Real Time Communication) Applications hosted on EnableX platform run natively on supported set of web browsers without any additional plugin downloads. 
+RTC Applications hosted on EnableX platform run natively on supported set of web browsers without any additional plugin downloads. 
 
-This basic Video Chat Application is generated using HTML, CSS, Bootstrap v4.0.0-alpha.6, JAVA Script, jQuery, Node V8.9.1 and EnxRtc (The EnableX Web Toolkit). 
+This basic 1-to-1 Video Chat Application is developed using HTML, CSS, Bootstrap v4.0.0-alpha.6, JAVA Script, jQuery, Node V8.9.1 and EnxRtc (The EnableX Web Toolkit). 
 
 >The details of the supported set of web browsers can be found here:
 https://developer.enablex.io/release-notes/#cross-compatibility
@@ -36,7 +36,7 @@ You need to get connected to our [Sales Team](sales@enablex.io) to get access fo
 * Register with EnableX [https://www.enablex.io] 
 * Create your Application
 * Get your App ID and App Key delivered to your Email
-* Clone or download this Repository [https://github.com/EnableX/Sample-Web-App.git] & follow the steps further 
+* Clone or download this Repository [https://github.com/EnableX/Sample-Web-App-1to1-RTC.git] & follow the steps further 
 
 
 #### 3.1.2 SSL Certificates
@@ -44,7 +44,7 @@ You need to get connected to our [Sales Team](sales@enablex.io) to get access fo
 The Application needs to run on https. So, you need to use a valid SSL Certificate for your Domain and point your application to use them. 
 
 However you may use self-signed Certificate to run this application locally. There are many Web Sites to get a Self-Signed Certificate generated for you, Google it. Few among them are:
-
+* https://letsencrypt.org/
 * https://www.sslchecker.com/csr/self_signed
 * https://www.akadia.com/services/ssh_test_certificate.html  
 

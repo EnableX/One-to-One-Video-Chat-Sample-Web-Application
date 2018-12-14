@@ -38,11 +38,17 @@ vcxutil.connectServer = function (options, data, callback) {
     var request = https.request(options, function (res) {
         res.on('data', function (chunk) {
             logger.info("RESPONSE DATA:- " + chunk);
-            callback(JSON.parse(chunk));
+            if(chunk.result === 0){
+                callback('success',JSON.parse(chunk));
+            }
+            else {
+                callback('error', JSON.parse(chunk));
+            }
         });
     });
     request.on('error', function (err) {
         logger.info("RESPONSE ERROR:- " + JSON.stringify(err));
+
     });
     if (data == null)
         request.end();

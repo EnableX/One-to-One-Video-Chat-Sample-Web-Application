@@ -13,7 +13,7 @@
 var localStream = null;
 var username = null;
 var room;
-
+const SUPPORT_URL = "http://enablex.io";
 // Player Options
 var options = {
     id: 'vcx_1001',
@@ -24,11 +24,11 @@ var options = {
         'nameDisplayMode': '',
         'frameFitMode': 'bestFit',
         'skin': 'classic',
-        'class': '',
-        'height': '400px',
-        'width': '400px',
-        'minHeight': '120px',
-        'minWidth': '160px',
+        'class': 'player_mode',
+        // 'height': '700px',
+        // 'width': '700px',
+        // 'minHeight': '120px',
+        // 'minWidth': '160px',
         'aspectRatio': '',
         'volume': 0,
         'media': '',
@@ -66,52 +66,6 @@ var options = {
     }
 };
 window.onload = function () {
-
-    // Local Stream Definition
-    var config = {
-        audio: true,
-        video: true,
-        data: true,
-        videoSize: [640, 480, 640, 480],
-        options: options
-    };
-
-    var countStream = 0;
-
-    var localStreamId = null;
-    var setLiveStream = function (stream) {
-
-        // Listening to Text Data
-        stream.addEventListener('stream-data', function (e) {
-            console.log('stream data received : ');
-            console.log(e);
-            var text = e.msg.textMessage;
-            var html = $(".multi_text_container_div").html();
-            $(".multi_text_container_div").html(html + text + "<br>");
-        });
-
-        if (!stream.local) {
-            var newStreamDiv = document.createElement('div');
-            newStreamDiv.setAttribute('id', 'liveStream_' + countStream);
-            newStreamDiv.setAttribute('class', 'live_stream_div');
-            document.getElementsByClassName('multi_video_container_div')[0].appendChild(newStreamDiv);
-            options.player.height = "120px";
-            options.player.width = "120px";
-            options.player.loader.class = "small_loader";
-            stream.show('liveStream_' + countStream, options);
-            countStream++;
-        }
-        else {
-            options.player.loader.class = "";
-            options.player.loader.show = false;
-            stream.show('local_vedio_div', options);
-        }
-
-    }
-
-
-    // URL Parsing to fetch Room Information to join
-
     var parseURLParams = function (url) {
         var queryStart = url.indexOf("?") + 1,
             queryEnd = url.indexOf("#") + 1 || url.length + 1,
@@ -131,11 +85,70 @@ window.onload = function () {
         }
         return parms;
     }
+    var urlData = parseURLParams(window.location.href);
+    var  name = urlData.user_ref[0];
+    var config = {
+        audio: true,
+        video: true,
+        data: true,
+        videoSize: [640, 480, 640, 480],
+        attributes : {
+            name:name
+        },
+        options: options
+    };
+
+    var countStream = 0;
+    var username;
+    var localStreamId = null;
+    var setLiveStream = function (stream,userName) {
+
+        // Listening to Text Data
+        stream.addEventListener('stream-data', function (e) {
+            var text = e.msg.textMessage;
+            var html = $("#multi_text_container_div").html();
+            $("#multi_text_container_div").html(html + text + "<br>");
+        });
+
+        if (!stream.local) {
+            var newStreamDiv = document.createElement('div');
+            newStreamDiv.setAttribute('id', 'liveStream_' + countStream);
+            newStreamDiv.setAttribute('class', 'live_stream_div');
+            document.getElementById('multi_video_container_div').appendChild(newStreamDiv);
+            stream.show('liveStream_' + countStream, options);
+            var node = document.createElement('div');
+            if(userName !== "")
+            {
+                node.innerHTML = userName;
+                node.classList.add("name-div");
+                document.getElementById('multi_video_container_div').appendChild(node);
+            }
+
+            countStream++;
+        }
+        else {
+            username = stream.getAttributes().name;
+            options.player.loader.class = "";
+            options.player.loader.show = false;
+            stream.show('local_video_div', options);
+            var node = document.createElement('div');
+            node.innerHTML = username;
+            node.classList.add("name-div");
+            document.getElementById('local_video_div').appendChild(node);
+        }
+
+    }
+
+
+    // URL Parsing to fetch Room Information to join
+
+
 
     // Function: To create user-json for Token Request
     var createDataJson = function (url) {
         var urlData = parseURLParams(url);
         username = urlData.user_ref[0];
+
         var retData = {
             "name": urlData.user_ref[0],
             "role": urlData.usertype[0],
@@ -150,8 +163,7 @@ window.onload = function () {
     // Function: Create Token
 
     createToken(createDataJson(window.location.href), function (response) {
-        var responseData = JSON.parse(response);
-        var token = responseData.token;
+        var token = response;
         var ATList = null;
 
         // JOin Room
@@ -169,20 +181,21 @@ window.onload = function () {
 
                 // Active Talker list is updated
                 room.addEventListener('active-talkers-updated', function (event) {
+
                     ATList = event.message.activeList;
-                    var video_player_len = document.querySelector('.multi_video_container_div').childNodes;
+                    var video_player_len = document.querySelector('#multi_video_container_div').childNodes;
                     if (event.message && event.message !== null && event.message.activeList && event.message.activeList !== null) {
 
                         if (ATList.length == video_player_len.length) {
                             return;
                         }
                         else {
-                            document.querySelector('.multi_video_container_div').innerHTML = "";
+                            document.querySelector('#multi_video_container_div').innerHTML = "";
                             for (stream in room.remoteStreams.getAll()) {
                                 var st = room.remoteStreams.getAll()[stream];
                                 for (j = 0; j < ATList.length; j++) {
                                     if (ATList[j].streamId == st.getID()) {
-                                        setLiveStream(st);
+                                        setLiveStream(st,ATList[j].name);
                                     }
                                 }
                             }
@@ -193,10 +206,11 @@ window.onload = function () {
 
                 // Stream has been subscribed successfully
                 room.addEventListener('stream-subscribed', function (streamEvent) {
+
                     var stream = (streamEvent.data && streamEvent.data.stream) ? streamEvent.data.stream : streamEvent.stream;
                     for (k = 0; k < ATList.length; k++) {
                         if (ATList[k].streamId == stream.getID()) {
-                            setLiveStream(stream);
+                            setLiveStream(stream,ATList[k].name);
                         }
                     }
                 });
@@ -252,3 +266,55 @@ $(document).on("click", "#user_radio", function (e) {
 $(document).on("click", "#all_user_radio", function (e) {
     $(document).find(".user_select_div").hide();
 });
+
+function audioMute() {
+    var elem = document.getElementsByClassName("icon-confo-mute")[0];
+    var onImgPath ="../img/mike.png", onImgName ="mike.png";
+    var offImgPath ="../img/mute-mike.png", offImgName ="mute-mike.png";
+    var currentImgPath = elem.src.split("/")[elem.src.split("/").length-1];
+    if(currentImgPath === offImgName){
+        localStream.unmuteAudio(function (arg) {
+            elem.src = onImgPath;
+            elem.title = "mute audio";
+        });
+
+    }
+    else if(currentImgPath === onImgName){
+        localStream.muteAudio(function (arg) {
+            elem.src = offImgPath;
+            elem.title = "unmute audio";
+        });
+    }
+};
+function videoMute() {
+    var elem = document.getElementsByClassName("icon-confo-video-mute")[0];
+    var onImgPath ="../img/video.png", onImgName ="video.png";
+    var offImgPath ="../img/mute-video.png", offImgName ="mute-video.png";
+    var currentImgPath = elem.src.split("/")[elem.src.split("/").length-1];
+    if(currentImgPath === offImgName){
+        localStream.unmuteVideo(function(res){
+            var streamId = localStream.getID();
+            var player = document.getElementById("stream"+streamId);
+            player.srcObject = localStream.stream;
+            player.play();
+            elem.src = onImgPath;
+            elem.title = "mute video";
+        });
+    }
+    else if(currentImgPath === onImgName){
+        localStream.muteVideo(function(res){
+            elem.src = offImgPath;
+            elem.title = "unmute video";
+        });
+    }
+};
+
+
+
+
+function endCall(){
+    var r = confirm("Are you really want to Quit??");
+    if (r == true) {
+        window.location.href = SUPPORT_URL;
+    }
+}
