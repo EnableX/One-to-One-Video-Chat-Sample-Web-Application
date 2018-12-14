@@ -16,10 +16,16 @@ var fs = require('fs')
 var morgan = require('morgan')
 var debug = require('debug')('vcloudx-server-api:server');
 var app = express()
+var auth = require('http-auth');
+var basicAuth = require('basic-auth');
+var vcxutil = require('./vcxutil');
 var vcxroom = require('./vcxroom')
 var vcxconfig = require('./vcxconfig')
 var bodyParser = require('body-parser')
-
+var basic = auth.basic({
+    realm: "Private Area.",
+    file: vcxconfig.pwdFilePath
+});
 
 // Initialization of basic HTTP / HTTPS Service
 
@@ -151,11 +157,17 @@ app.post('/createToken/', function (req, res) {
 
 
 app.post('/createRoom/', function (req, res) {
-    vcxroom.createRoom(function (status, data) {
-        res.send(data);
-        res.status(200);
-
-    });
+    var user = basicAuth(req);
+    if(vcxutil.validAuthInvite(user, basic)){ // Here you need some logic to validate authentication
+        vcxroom.createRoom(function (status, data) {
+            res.send(data);
+            res.status(200);
+        });
+    } else {
+        res.set({
+            'WWW-Authenticate': 'Basic realm="simple-admin"'
+        }).send(401);
+    }
 });
 
 

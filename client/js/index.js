@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////
 //
 // File: index.js
-// This is applicaiton file for login page to accept login credentials
+// This is application file for login page to accept login credentials
 //
 // Last Updated: 29-11-2018
 // Reformat, Indentation, Inline Comments
@@ -13,7 +13,8 @@ window.onload = function () {
     $(".login_join_div").show();
 
 }
-
+var username = "demo";
+var password = "enablex";
 
 // Verifies login credentials before moving to Conference page
 
@@ -71,7 +72,6 @@ document.getElementById('create_room').addEventListener('click', function (event
         document.getElementById("roomName").value = result;
         document.getElementById("create_room_div").style.display = "none";
         document.getElementById("message").innerHTML = "We have prefilled the form with room-id. Share it with someone you want to talk to";
-
     });
 });
 
@@ -99,6 +99,7 @@ var createRoom = function (callback) {
     };
     xhttp.open("POST", "/createRoom/", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
     xhttp.send();
 };
 
