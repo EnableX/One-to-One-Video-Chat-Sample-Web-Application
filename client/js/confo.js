@@ -66,6 +66,9 @@ var options = {
     }
 };
 window.onload = function () {
+    
+    // URL Parsing to fetch Room Information to join
+
     var parseURLParams = function (url) {
         var queryStart = url.indexOf("?") + 1,
             queryEnd = url.indexOf("#") + 1 || url.length + 1,
@@ -91,7 +94,7 @@ window.onload = function () {
         audio: true,
         video: true,
         data: true,
-        videoSize: [640, 480, 640, 480],
+        videoSize: [1280,720,1280,720],
         attributes : {
             name:name
         },
@@ -138,11 +141,6 @@ window.onload = function () {
         }
 
     }
-
-
-    // URL Parsing to fetch Room Information to join
-
-
 
     // Function: To create user-json for Token Request
     var createDataJson = function (url) {
@@ -224,7 +222,7 @@ window.onload = function () {
                         'timestamp': data.message.timestamp,
                         'username': data.message.from
                     };
-                    plotChat(obj);
+                    // Handle UI to  display message
                 });
 
                 // Stream went out of Room
