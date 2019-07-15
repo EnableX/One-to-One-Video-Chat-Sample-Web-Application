@@ -1,0 +1,7 @@
+{
+  "name": "EnableX_WebApp_Sample",
+  "description": "A Basic peer to peer sample app",
+  "repository": "https://github.com/EnableX/Sample-Web-App-1to1-RTC",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["node", "EnableX", "One-on-One"]
+}
