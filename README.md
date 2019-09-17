@@ -33,7 +33,7 @@ To get Live Demo of this Sample App, please get connected to our [Sales Team](ma
 * Register with EnableX [https://www.enablex.io] 
 * Create your Application
 * Get your App ID and App Key delivered to your Email
-* Clone or download this Repository [https://github.com/EnableX/Sample-Web-App-1to1-RTC.git] & follow the steps further 
+* Clone or download this Repository [https://github.com/EnableX/One-to-One-Video-Chat-Sample-Web-Application.git] & follow the steps further 
 
 
 #### 3.1.2 SSL Certificates
