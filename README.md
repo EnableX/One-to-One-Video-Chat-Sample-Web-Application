@@ -10,17 +10,14 @@ This basic 1-to-1 Video Chat Application is developed using HTML, CSS, Bootstrap
 https://developer.enablex.io/release-notes/#cross-compatibility
 
 
-
 ## 1. Important!
 
 When developing a Node Application with EnxRtc.js make sure to include the updated EnxRtc.js polyfills for RTCPeerConnection and getUserMedia otherwise your application will not work in web browsers.
 
 
-
 ## 2. Demo
 
 To get Live Demo of this Sample App, please get connected to our [Sales Team](mailto:sales@enablex.io).
-
 
 
 ## 3. Installation
@@ -30,27 +27,37 @@ To get Live Demo of this Sample App, please get connected to our [Sales Team](ma
 
 #### 3.1.1 App Id and App Key 
 
-* Register with EnableX [https://www.enablex.io] 
+* Register with EnableX https://portal.enablex.io/trial-sign-up/
 * Create your Application
-* Get your App ID and App Key delivered to your Email
-* Clone or download this Repository [https://github.com/EnableX/One-to-One-Video-Chat-Sample-Web-Application.git] & follow the steps further 
+* Get your App ID and App Key delivered to your registered email
+* Clone or download this repository `git clone https://github.com/EnableX/One-to-One-Video-Chat-Sample-Web-Application.git`
 
 
-#### 3.1.2 SSL Certificates
+#### 3.1.2 SSL Certificates or Self-Signed Certificates
 
 The Application needs to run on https. So, you need to use a valid SSL Certificate for your Domain and point your application to use them. 
 
-However you may use self-signed Certificate to run this application locally. There are many Web Sites to get a Self-Signed Certificate generated for you, Google it. Few among them are:
+However you may use self-signed Certificate to run this application locally. There are many websites to get a self-signed certificate generated for you.
 * https://letsencrypt.org/
 * https://www.sslchecker.com/csr/self_signed
 * https://www.akadia.com/services/ssh_test_certificate.html  
 
-As you have Certificate or created a Self-Signed Certificate, create a directory "certs" under your Sample Web App Directory. Copy your Certificate files (.key and .crt files)  to this directory. 
+The following below can also be used to create a self-signed certificate. 
 
+`cd One-to-One-Video-Chat-Sample-Web-Application`
+
+`mkdir certs`
+
+`sudo openssl req -x509 -newkey rsa:4096 -keyout ./certs/localhost.key -out ./certs/localhost.crt -days 10000 -nodes`
+
+`sudo chmod 755 ./certs/localhost.*`
 
 #### 3.1.3 Configure
 
-Before you can run this application by hosting it locally you need to customize `server/vcxconfig.js` to meet your needs:
+Before you can run this application by hosting it locally you need to customize `server/vcxconfig.js` to meet your needs.
+
+`nano ./server/vcxconfig.js`
+
 ```javascript 
 vcxconfig.SERViCE = {
   name: "EnableX Sample Web App",     // Name of the Application [Change optional]
@@ -62,9 +69,9 @@ vcxconfig.SERViCE = {
 };
 
 vcxconfig.Certificate = {
-  ssl_key:    "../certs/yourdomain.key",  // Use the certificate ".key" [self signed or registered]
-  ssl_cert :  "../certs/yourdomain.crt",  // Use the certificate ".crt" [self signed or registered]
-  sslCaCerts :  ["../cert/yourdomain.ca-bundle"]    // Use the certificate CA[chain] [self signed or registered]
+    ssl_key: 	"../certs/localhost.key",            // Path to .key file or registered key
+    ssl_cert: 	"../certs/localhost.crt"             // Path to .crt file or registered crt
+// sslCaCerts :  ["../cert/yourdomain.ca-bundle"]    // Use the certificate CA[chain] [self signed or registered]
 };
 
 vcxconfig.SERVER_API_SERVER = {
@@ -72,8 +79,8 @@ vcxconfig.SERVER_API_SERVER = {
 };
 
 vcxconfig.clientPath  = "../client";    // UI files location
-vcxconfig.APP_ID      = "YOUR_APP_ID";  // Enter Your App ID
-vcxconfig.APP_KEY     = "YOUR_APP_KEY"; // Enter Your App Key
+vcxconfig.APP_ID      = "YOUR_APP_ID";  // Enter Your App ID you received from registered email
+vcxconfig.APP_KEY     = "YOUR_APP_KEY"; // Enter Your App Key you have received from registered email
 ```
 
 ### 3.2 Build
@@ -83,14 +90,23 @@ Run `npm install --save` to build the project and the build artifacts will be st
 
 #### 3.2.1 Run Server
 
-Run `node server.js` inside `server` folder for starting your Server. 
+Run `node server.js` inside `server` folder to start your server. 
 
+`cd server`
 
-#### 3.2.2 Test 
+`node server.js`
+Server started. Listening on Port 4443
 
-* Open a browser and go to [https://yourdomain.com:4443/](https://localhost:4443/). The browser should load the App. 
-* Allow access to Camera and Mic as and when prompted to start your first RTC Call through EnableX
+#### 3.2.2 Test Video Call
 
+* Open a browser and go to `https://localhost:4443/`. The browser should load the App. Go to -> Advanced -> Proceed to localhost
+* Don't have a Room ID? Create here (create a new RoomID)
+* Store the Room ID for future use or share
+* Enter a username (e.g. test0)
+* Join and allow access to camera and microphone when prompted to start your first webRTC call through EnableX
+* Open another browser tab and enter `https://localhost:4443/`
+* Enter the same roomID previously created and add a different username (test1) and click join
+* Now, you should see your own video in both the tabs!
 
 
 ## 4 Server API
@@ -108,11 +124,9 @@ To know more about Server API, go to:
 https://developer.enablex.io/latest/server-api/
 
 
-
 ## 5 Client API
 
 Client End Point Application uses Web Toolkit EnxRtc.js to communicate with EnableX Servers to initiate and manage RTC Communications.  
 
 To know more about Client API, go to:
 https://developer.enablex.io/latest/client-api/
-
