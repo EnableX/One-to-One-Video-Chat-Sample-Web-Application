@@ -10,24 +10,28 @@
 
 
 window.onload = function () {
+
+    document.querySelector("#version_num").innerText = EnxRtc.version;
     $(".login_join_div").show();
 
 }
 var username = "demo";
 var password = "enablex";
 
+
+
 // Verifies login credentials before moving to Conference page
 
 document.getElementById('login_form').addEventListener('submit', function (event) {
     event.preventDefault();
 
-
+    $("#joinRoom").attr("disabled","disabled");
     var name = document.querySelector('#nameText'), room = document.querySelector('#roomName'), agree = document.querySelector('[name="agree"]'), errors = [];
     if (name.value.trim() === '') {
         errors.push('Enter your name.');
     }
     if (room.value.trim() === '') {
-        errors.push('Enter your Room Id.')
+        errors.push('Enter your Room Id.');
     }
 
     if (!agree.checked ) {
@@ -39,15 +43,9 @@ document.getElementById('login_form').addEventListener('submit', function (event
             return item + "</br>";
         });
         var allerrors = mappederrors.join('').toString();
-        $.toast({
-            heading: 'Error',
-            text: allerrors,
-            showHideTransition: 'fade',
-            icon: 'error',
-            position: 'top-right',
-            showHideTransition: 'slide'
-        });
+        toastr.error(allerrors);
 
+        $("#joinRoom").removeAttr("disabled");
         return false;
     }
 
@@ -56,11 +54,27 @@ document.getElementById('login_form').addEventListener('submit', function (event
 
         if (!jQuery.isEmptyObject(data)) {
 
+            room_id = data.room_id;
             var user_ref = document.getElementById('nameText').value;
+            var role = document.getElementById('attendeeRole').value;
+            var retData = {
+                name: user_ref,
+                role: role,
+                roomId:room_id,
+                user_ref: user_ref,
+            };
 
-            window.location.href = "confo.html?roomId=" + data.room_id + "&usertype=participant&user_ref=" + user_ref;
+            createToken(retData,function(response){
+                var token = response;
+                window.location.href = "confo.html?token="+token;
+
+            });
+
+
+
         } else {
-            alert('No room found');
+            toastr.error("Room Not Found");
+
         }
     });
 });
@@ -75,6 +89,7 @@ document.getElementById('create_room').addEventListener('click', function (event
     });
 });
 
+// create room api call using XML request
 
 var createRoom = function (callback) {
     var xhttp = new XMLHttpRequest();
@@ -82,13 +97,7 @@ var createRoom = function (callback) {
         if (this.readyState == 4 && this.status == 200) {
             var response =  JSON.parse(this.responseText);
             if(response.error){
-                $.toast({
-                    heading: 'Error',
-                    text: response.error,
-                    showHideTransition: 'fade',
-                    icon: 'error',
-                    position: 'top-right'
-                });
+                toastr.error(response.error);
 
             }
             else {
@@ -101,6 +110,25 @@ var createRoom = function (callback) {
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
     xhttp.send();
+};
+
+var createToken = function (details, callback) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var response =  JSON.parse(this.responseText);
+            if(response.error){
+                toastr.error(response.error);
+
+            }
+            else {
+                callback(response.token);
+            }
+        }
+    };
+    xhttp.open("POST", "/createToken/", true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(JSON.stringify(details));
 };
 
 

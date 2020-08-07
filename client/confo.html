@@ -1,46 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/bootstrap.css"/>
-    <link rel="stylesheet" href="css/confo.css">
-    <link rel="shortcut icon" type="image/png" href="/img/enablex.png"/>
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/tether.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/EnxRtc.js"></script>
-    <script type="text/javascript" src="js/util.js"></script>
-    <script type="text/javascript" src="js/confo.js"></script>
-    <link rel="stylesheet" href="css/jquery.toast.css">
 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="Subrat Thayal, PCDC" />
+    <title>Enablex - Conference</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/minimal/minimal.css" />
+    <link rel="stylesheet" href="./assets/plugins/bootstrap4/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/plugins/themify-icons/themify-icons.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link href="./css/core.css" rel="stylesheet" />
 </head>
-<body>
-<div class="container-fluid">
-    <div class="row ">
-        <div class="col-md-2"></div>
-        <div class="col-md-4" style="width: 100%;height:100%;">
-            <div class="vedio_container_div">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div id="local_video_div"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div id="multi_video_container_div" style=""></div>
+
+<body class="img-cover" style="overflow: hidden;">
+<div id="overlay" style="display: none;">
+    <div class="loader" style="width: 50px;">
+        <img src="./img/loading.gif" />
+    </div>
+</div>
+
+
+
+<!--body wrapper start-->
+<div class="row" id="call_container_div">
+    <div class="call-top-header">
+        <div class="logo" style="padding-top: 8px;">
+            <img src="./img/enableX_logo.png" style="max-width: 160px;" />
+        </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 px-0 mx-0">
+        <div class="local_class_peep" id="local_view">
+            <div id="self-view"></div>
+            <div class="self-name"></div>
+        </div>
+        <div class="remote_class_peep" id="remote_view">
+
+            <div id="call_div"></div>
+            <div id="show_stream_div"></div>
+
+            <div class="remote-name"></div>
+        </div>
+
+        <div class="toolbar-buttons">
+            <div class="tools">
+                <div class="mute-icon" id="mute_audio" title="Mute/Unmute Audio" style="cursor: pointer;">
+                    <i class="fa fa-microphone" id="self_aMute"></i>
+                </div>
+                <div class="video-mute-icon" id="mute_video" title="Mute/Unmute Video" style="cursor: pointer;">
+                    <i class="fa fa-video" id="self_vMute"></i>
+                </div>
+                <div class="video-mute-icon" id="share_screen_btn" title="Start Share" style="cursor: pointer;">
+                    <i class="fa fa-desktop fa-fw SSicon" onClick="screenShare()"></i>
+                </div>
+                <div class="video-mute-icon" id="toggle_chat" title="Chat" style="cursor: pointer; position: relative;">
+                    <i class="fas fa-comment-dots fa-fw CBicon" onClick="toggleChat()"></i>
+                    <span class="tag tag-danger top" id="chat-tag" style="display: none; left: 25px;">&nbsp;</span>
+                </div>
+                <div class="video-mute-icon" title="End Call" style="cursor: pointer; background: red;">
+                    <i class="fas fa-phone fa-fw CBicon" id="disconnect_call" style="margin-left: -20px;"></i>
+                </div>
+
+            </div>
+        </div>
+        <div id="chat_window-popup">
+            <div class="card" id="chat_container">
+                <div class="card-header text-uppercase"><b>Chat</b></div>
+                <div class="items-list">
+                    <div id="frame">
+                        <div class="content" id="chat-window">
+                            <div class="messages">
+                                <ul class="chat-message" id="chat-message"></ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                   <div class="controls" id="controls" style="background-color:grey;position: fixed;bottom: 0;width:100%;text-align: center">
-                       <img src="../img/mike.png" style="margin-right: 20px;cursor: pointer;" class="cus_img_icon icon-confo-mute"  onclick="audioMute()" title="mute audio" />
-                       <img src="../img/video.png" style="margin-right: 20px;cursor: pointer;" class="cus_img_icon icon-confo-video-mute" title="mute video" onclick="videoMute()" />
-                       <img src="../img/end-call.png" style="margin-right: 20px;cursor: pointer;" class="cus_img_icon end_call" title="End_call" onclick="endCall()" />
-                   </div>
+                <div class="card-block">
+                    <textarea class="form-control" name="" id="chat-text-area" onkeyup="sendChat(event)"></textarea>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript" src="js/jquery.toast.js"></script>
+<!-- Placed js at the end of the document so the pages load faster -->
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/tether.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+
+
+<script type="text/javascript" src="assets/plugins/jscrollpane/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="assets/plugins/jscrollpane/mwheelIntent.js"></script>
+
+
+<script type="text/javascript" src="js/scrollbar.js"></script>
+<script type="text/javascript" src="js/EnxRtc.js"></script>
+
+<script type="text/javascript" src="js/confo.js"></script>
+
 </body>
+
 </html>
