@@ -1,3 +1,11 @@
-npm install;
-cd server;
-node server.js;
+git clone https://github.com/EnableX/One-to-One-Video-Chat-Sample-Web-Application.git
+cd One-to-One-Video-Chat-Sample-Web-Application
+npm install
+export SERVICE_PORT=5000
+export ENABLEX_APP_ID=XXXXXXXXXX
+export ENABLEX_APP_KEY=XXXXXXXXX
+mkdir certs
+cd certs
+openssl req -nodes -new -x509   -keyout example.key -out example.crt   -days 365   -subj '/CN=example.com/O=My Company Name LTD./C=US'; cat example.crt > example.ca-bundle
+cd ../server
+node server.js
