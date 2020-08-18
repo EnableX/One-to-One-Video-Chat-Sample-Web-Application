@@ -126,7 +126,7 @@ app.use(express.static(vcxconfig.clientPath));
 // Application Server Route Definitions - These functions communicate with EnableX Server API
 // Route: To get liist of all Rooms in your Application
 
-app.get('/getAllRooms', function (req, res) {
+app.get('/api/get-all-rooms', function (req, res) {
 
     vcxroom.getAllRooms(function (data) {
         res.status(200);
@@ -137,7 +137,7 @@ app.get('/getAllRooms', function (req, res) {
 
 // Route: To get information of a given room.
 
-app.get('/getRoom/:roomName', function (req, res) {
+app.get('/api/get-room/:roomName', function (req, res) {
     var room = req.params.roomName;
     vcxroom.getRoom(room, function (status,data) {
         res.status(200);
@@ -148,7 +148,7 @@ app.get('/getRoom/:roomName', function (req, res) {
 
 // Route: To get Token for a Room
 
-app.post('/createToken/', function (req, res) {
+app.post('/api/create-token/', function (req, res) {
     vcxroom.getToken(req.body, function (status,data) {
         res.status(200);
         res.send(data);
@@ -156,7 +156,7 @@ app.post('/createToken/', function (req, res) {
 });
 
 
-app.post('/createRoom/', function (req, res) {
+app.post('/api/create-room/', function (req, res) {
     var user = basicAuth(req);
     if(vcxutil.validAuthInvite(user, basic)){ // Here you need some logic to validate authentication
         vcxroom.createRoom(function (status, data) {
