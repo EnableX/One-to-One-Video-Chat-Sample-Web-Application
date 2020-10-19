@@ -10,24 +10,33 @@ const vcxutil = require('./vcxutil');
 
 const vcxroom = {};
 
-const obj = {
-  name: 'test Room',
-  owner_ref: 'xdada',
+// room object for creating room for one to one call
+const roomObj = {
+  name: 'room for one to one video meeting',
+  owner_ref: 'one to one github sample',
   settings: {
-    description: '',
     scheduled: false,
-    scheduled_time: '',
-    participants: '2',
-    duration: '60',
-    auto_recording: false,
-    active_talker: true,
-    wait_moderator: false,
-    quality: 'SD',
     adhoc: false,
-    mode: 'group',
+    moderators: '1',
+    participants: '1',
+    duration: '30',
+    quality: 'SD',
+    auto_recording: false,
   },
-  sip: {
-    enabled: false,
+};
+
+// room object for creating room with multi party calling
+const multiPartyRoomObj = {
+  name: 'room for multiparty video meeting',
+  owner_ref: 'multiparty github sample',
+  settings: {
+    scheduled: false,
+    adhoc: false,
+    moderators: '1',
+    participants: '5',
+    duration: '30',
+    quality: 'SD',
+    auto_recording: false,
   },
 };
 
@@ -85,7 +94,25 @@ vcxroom.getRoom = function getRoom(roomName, callback) {
 
 // Function: To create Room
 vcxroom.createRoom = function createRoom(callback) {
-  const roomMeta = obj;
+  const roomMeta = roomObj;
+  options.path = '/v1/rooms/';
+  options.method = 'POST';
+  options.headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Basic ${vcxutil.getBasicAuthToken()}`,
+  };
+  vcxutil.connectServer(options, JSON.stringify(roomMeta), (status, data) => {
+    if (status === 'success') {
+      callback(status, data);
+    } else if (status === 'error') {
+      callback(status, data);
+    }
+  });
+};
+
+// Function: To create Room
+vcxroom.createRoomMulti = function createRoom(callback) {
+  const roomMeta = multiPartyRoomObj;
   options.path = '/v1/rooms/';
   options.method = 'POST';
   options.headers = {
