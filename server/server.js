@@ -92,8 +92,8 @@ app.get('/api/get-all-rooms', (req, res) => {
 
 // Route: To get information of a given room.
 app.get('/api/get-room/:roomName', (req, res) => {
-  const room = req.params.roomName;
-  vcxroom.getRoom(room, (status, data) => {
+  const { roomName } = req.params;
+  vcxroom.getRoom(roomName, (status, data) => {
     res.status(200);
     res.send(data);
   });
@@ -123,7 +123,7 @@ app.post('/api/create-room/', (req, res) => {
 });
 
 // Route: To create a Room (multiparty)
-app.post('/api/room/multi', (req, res) => {
+app.post('/api/room/multi/', (req, res) => {
   const user = basicAuth(req);
   if (vcxutil.validAuthInvite(user, basic)) { // Here you need some logic to validate authentication
     vcxroom.createRoomMulti((status, data) => {
