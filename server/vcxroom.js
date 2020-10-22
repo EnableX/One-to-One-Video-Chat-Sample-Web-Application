@@ -16,7 +16,7 @@ const roomObj = {
   owner_ref: 'one to one github sample',
   settings: {
     scheduled: false,
-    adhoc: false,
+    adhoc: true,
     moderators: '1',
     participants: '1',
     duration: '30',
@@ -31,7 +31,7 @@ const multiPartyRoomObj = {
   owner_ref: 'multiparty github sample',
   settings: {
     scheduled: false,
-    adhoc: false,
+    adhoc: true,
     moderators: '1',
     participants: '5',
     duration: '30',
