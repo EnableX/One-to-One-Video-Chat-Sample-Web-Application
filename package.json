@@ -1,26 +1,28 @@
 {
-  "name": "chat_example",
+  "name": "EnableX-One-to-One-Video-Conference-NodeJS-Application",
   "version": "1.0.1",
-  "description": "",
+  "description": "Sample Application to enable developers to understand how to build applications using EnableX Video API.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./server/server.js"
   },
   "devDependencies": {
-    "http": "^0.0.0",
-    "express": "^4.16.2",
-    "btoa": "^1.1.2",
-    "morgan": "^1.9.0"
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "base-64": "^0.1.0",
-    "cryptr": "^3.0.0",
-    "express-session": "^1.15.6",
+    "btoa": "^1.1.2",
+    "basic-auth": "^2.0.1",
+    "body-parser": "^1.19.0",
+    "debug": "^4.1.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
     "http-auth": "^3.2.3",
-    "localStorage": "^1.0.3",
     "log4js": "^1.0.1"
   }
 }
