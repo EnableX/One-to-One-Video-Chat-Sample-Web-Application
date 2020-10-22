@@ -15,9 +15,9 @@ https://developer.enablex.io/video/browser-compatibility-of-enablex-video/
 When developing a Node Application with EnxRtc.js make sure to include the updated EnxRtc.js polyfills from https://developer.enablex.io/video-api/client-api/web-toolkit/ for RTCPeerConnection and getUserMedia otherwise your application will not work in web browsers.
 
 
-## 2. Demo
+## 2. Trial
 
-Visit Demo Zone (https://portal.enablex.io/demo-zone/) to request a Guided Demo or Demo Access to different type of application available there.
+Sign up for a free trial https://portal.enablex.io/cpaas/trial-sign-up/ or try our multiparty video chat https://try.enablex.io/
 
 
 ## 3. Installation
