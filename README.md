@@ -125,4 +125,4 @@ https://developer.enablex.io/latest/server-api/
 Client End Point Application uses Web Toolkit EnxRtc.js to communicate with EnableX Servers to initiate and manage RTC Communications.
 
 To know more about Client API, go to:
-https://developer.enablex.io/latest/client-api/
+https://developer.enablex.io/video-api/client-api/
