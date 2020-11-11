@@ -30,7 +30,7 @@ Sign up for a free trial https://portal.enablex.io/cpaas/trial-sign-up/ or try o
 * Register with EnableX https://portal.enablex.io/trial-sign-up/
 * Create your Application
 * Get your App ID and App Key delivered to your registered email
-* Clone or download this repository `git clone https://github.com/EnableX/One-to-One-Video-Chat-Sample-Web-Application.git`
+* Clone or download this repository `git clone https://github.com/EnableX/One-to-One-Video-Chat-Sample-Web-Application.git --recursive`
 
 
 #### 3.1.2 SSL Certificates or Self-Signed Certificates
@@ -50,9 +50,9 @@ The following below can also be used to create a self-signed certificate.
 
 `cd certs`
 
-`sudo openssl req -x509 -newkey rsa:4096 -keyout ./certs/localhost.key -out ./certs/localhost.crt -days 10000 -nodes`
+`sudo openssl req -x509 -newkey rsa:4096 -keyout ./certs/example.key -out ./certs/example.crt -days 10000 -nodes`
 
-`sudo chmod 755 ./certs/localhost.*`
+`sudo chmod 755 ./certs/example.*`
 
 `cd ..`
 
@@ -87,10 +87,10 @@ Run `npm install` to build the project and the build artifacts will be stored in
 #### 3.2.1 Run Server
 
 Run `node server.js` inside `server` folder to start your server.
-
-`cd server`
-
-`node server.js`
+```javascript
+  cd server
+  node server.js
+```
 Server started. Listening on Port 5000
 
 #### 3.2.2 Test Video Call
@@ -112,12 +112,11 @@ meeting rooms. API Access is given to each Application through the assigned App 
 are to be used as Username and Password respectively to pass as HTTP Basic Authentication header to access Server API.
 
 For this application, the following Server API calls are used:
-* https://developer.enablex.io/video-api/server-api/rooms-route/#get-rooms - To get list of Rooms
-* https://developer.enablex.io/video-api/server-api/rooms-route/#get-room-info - To get information of the given Room
-* https://developer.enablex.io/video-api/server-api/rooms-route/#create-token - To create Token for the given Room
+* https://developer.enablex.io/video-api/server-api/rooms-route/#create-room - To create room to carry out a video session
+* https://developer.enablex.io/video-api/server-api/rooms-route/#create-token - To create Token for the given Room to join a session
 
 To know more about Server API, go to:
-https://developer.enablex.io/latest/server-api/
+https://developer.enablex.io/video-api/server-api/
 
 
 ## 5 Client API
