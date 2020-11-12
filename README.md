@@ -43,19 +43,14 @@ However you may use self-signed Certificate to run this application locally. The
 * https://www.akadia.com/services/ssh_test_certificate.html
 
 The following below can also be used to create a self-signed certificate.
-
-`cd One-to-One-Video-Chat-Sample-Web-Application`
-
-`mkdir certs`
-
-`cd certs`
-
-`sudo openssl req -x509 -newkey rsa:4096 -keyout ./certs/example.key -out ./certs/example.crt -days 10000 -nodes`
-
-`sudo chmod 755 ./certs/example.*`
-
-`cd ..`
-
+```javascript
+  cd One-to-One-Video-Chat-Sample-Web-Application
+  mkdir certs
+  cd certs
+  sudo openssl req -x509 -newkey rsa:4096 -keyout ./certs/example.key -out ./certs/example.crt -days 10000 -nodes
+  sudo chmod 755 ./certs/example.*
+  cd ..
+```
 #### 3.1.3 Configure
 
 Before you can run this application by hosting it you need to set three system environment variables. These are:
