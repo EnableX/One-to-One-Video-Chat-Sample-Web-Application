@@ -1,10 +1,10 @@
-# 1-to-1 RTC: A Sample Web App with EnableX Video Web Toolkit
+# 1-to-1 RTC: A Sample Web App using Node.js with EnableX Web Toolkit
 
-The Sample Web App demonstrates the use of Video APIs for EnableX platform to carry out 1-to-1 RTC (Real Time Communication). The main motivation behind this application is to demonstrate usage of Video APIs and allow developers to ramp up on app by hosting on their own devices instead of directly using servers.
+The Sample Web App demonstrates the use of APIs for EnableX platform to develop basic 1-to-1 RTC (Real Time Communication) Application. The main motivation behind this application is to demonstrate usage of APIs and allow developers to ramp up on app by hosting on their own devices instead of directly using servers.
 
 RTC Applications hosted on EnableX platform run natively on supported set of web browsers without any additional plugin downloads.
 
-This basic 1-to-1 Video Chat Application is developed using HTML, CSS, Bootstrap, JAVA Script, jQuery, Node V8.9.1 and EnxRtc (The EnableX Web Toolkit).
+This basic 1-to-1 Video Chat Application is developed using HTML, CSS, Bootstrap, JavaScript, jQuery, Node.js and EnxRtc (The EnableX Web Toolkit).
 
 >The details of the supported set of web browsers can be found here:
 https://developer.enablex.io/video/browser-compatibility-of-enablex-video/
@@ -12,7 +12,7 @@ https://developer.enablex.io/video/browser-compatibility-of-enablex-video/
 
 ## 1. Important!
 
-When developing a Node Application with EnxRtc.js make sure to include the updated EnxRtc.js polyfills from https://developer.enablex.io/video-api/client-api/web-toolkit/ for RTCPeerConnection and getUserMedia otherwise your application will not work in web browsers.
+When developing a Client Application with EnxRtc.js make sure to include the updated EnxRtc.js polyfills from https://developer.enablex.io/video-api/client-api/web-toolkit/ for RTCPeerConnection and getUserMedia. Otherwise your application will not work in web browsers.
 
 
 ## 2. Trial
@@ -22,22 +22,21 @@ Sign up for a free trial https://portal.enablex.io/cpaas/trial-sign-up/ or try o
 
 ## 3. Installation
 
-
 ### 3.1 Pre-Requisites
 
 #### 3.1.1 App Id and App Key
 
-* Register with EnableX https://portal.enablex.io/trial-sign-up/
+* Register with EnableX [https://portal.enablex.io/cpaas/trial-sign-up/] 
 * Create your Application
-* Get your App ID and App Key delivered to your registered email
-* Clone or download this repository `git clone https://github.com/EnableX/One-to-One-Video-Chat-Sample-Web-Application.git --recursive`
-
+* Get your App ID and App Key
+* Clone this repository `git clone https://github.com/EnableX/One-to-One-Video-Chat-Sample-Web-Application.git --recursive`
 
 #### 3.1.2 SSL Certificates or Self-Signed Certificates
 
 The Application needs to run on https. So, you need to use a valid SSL Certificate for your Domain and point your application to use them.
 
-However you may use self-signed Certificate to run this application locally. There are many websites to get a self-signed certificate generated for you.
+However you may use self-signed Certificate to run this application locally. There are many Web Sites to get a Self-Signed Certificate generated for you, Google it. Few among them are:
+
 * https://letsencrypt.org/
 * https://www.sslchecker.com/csr/self_signed
 * https://www.akadia.com/services/ssh_test_certificate.html
@@ -51,13 +50,15 @@ The following below can also be used to create a self-signed certificate.
   sudo chmod 755 ./certs/example.*
   cd ..
 ```
+
 #### 3.1.3 Configure
 
-Before you can run this application by hosting it you need to set three system environment variables. These are:
+Before you can run this application, configure the service by setting following system environment variables:
+
 ```javascript
-SERVICE_PORT : Node port on which your application will run. Default port set is 5000
-ENABLEX_APP_ID : Your EnableX "App ID" - It's your username for EnableX API and can be found at Dashboard > Projects https://portal.enablex.io/dashboard/
-ENABLEX_APP_KEY : Your EnableX "App Key" - - It's your password for EnableX API and can be found at Dashboard > Projects https://portal.enablex.io/dashboard/
+  SERVICE_PORT : Node port on which your application will run. Default port set is 5000
+  ENABLEX_APP_ID : Your EnableX "App ID" - It's your username for EnableX API and can be found at Dashboard > Projects https://portal.enablex.io/dashboard/
+  ENABLEX_APP_KEY : Your EnableX "App Key" - - It's your password for EnableX API and can be found at Dashboard > Projects https://portal.enablex.io/dashboard/
 ```
 
 For Mac and Linux, open a terminal window and type the following commands. Note - Replace all the characters after the `=` with values from your EnableX account:
@@ -77,7 +78,6 @@ On Windows, open a powershell / command window and type the following commands. 
 ### 3.2 Build
 
 Run `npm install` to build the project and the build artifacts will be stored in the `./node_modules` directory.
-
 
 #### 3.2.1 Run Server
 
@@ -100,7 +100,7 @@ Server started. Listening on Port 5000
 * Now, you should see your own video in both the tabs!
 
 
-## 4 Server API
+## 4. Server API
 
 EnableX Server API is a Rest API service meant to be called from Partners' Application Server to provision video enabled
 meeting rooms. API Access is given to each Application through the assigned App ID and App Key. So, the App ID and App Key
@@ -114,7 +114,7 @@ To know more about Server API, go to:
 https://developer.enablex.io/video-api/server-api/
 
 
-## 5 Client API
+## 5. Client API
 
 Client End Point Application uses Web Toolkit EnxRtc.js to communicate with EnableX Servers to initiate and manage RTC Communications.
 
