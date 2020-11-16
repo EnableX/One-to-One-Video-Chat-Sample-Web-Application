@@ -45,20 +45,18 @@ The following below can also be used to create a self-signed certificate.
 ```javascript
   cd One-to-One-Video-Chat-Sample-Web-Application
   mkdir certs
-  cd certs
   sudo openssl req -x509 -newkey rsa:4096 -keyout ./certs/example.key -out ./certs/example.crt -days 10000 -nodes
   sudo chmod 755 ./certs/example.*
-  cd ..
 ```
 
 #### 3.1.3 Configure
 
-Before you can run this application, configure the service by setting following system environment variables:
+Before you can run this application, configure the service. Copy the `server/example.env` as `server/.env` and update the values. Or you can set following system environment variables instead:
 
 ```javascript
-  SERVICE_PORT : Node port on which your application will run. Default port set is 5000
-  ENABLEX_APP_ID : Your EnableX "App ID" - It's your username for EnableX API and can be found at Dashboard > Projects https://portal.enablex.io/dashboard/
-  ENABLEX_APP_KEY : Your EnableX "App Key" - - It's your password for EnableX API and can be found at Dashboard > Projects https://portal.enablex.io/dashboard/
+  SERVICE_PORT - Node port on which your application will run. Default port set is 5000
+  ENABLEX_APP_ID - Your EnableX `App ID` - It's your username for EnableX API and can be found at Dashboard > Projects https://portal.enablex.io/dashboard/
+  ENABLEX_APP_KEY - Your EnableX `App Key` - - It's your password for EnableX API and can be found at Dashboard > Projects https://portal.enablex.io/dashboard/
 ```
 
 For Mac and Linux, open a terminal window and type the following commands. Note - Replace all the characters after the `=` with values from your EnableX account:
