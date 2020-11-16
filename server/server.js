@@ -5,20 +5,12 @@ const morgan = require('morgan');
 const debug = require('debug')('vcloudx-server-api:server');
 
 const app = express();
-const auth = require('http-auth');
-const basicAuth = require('basic-auth');
 const bodyParser = require('body-parser');
-const vcxutil = require('./vcxutil');
 require('dotenv').config();
 const log = require('../util/logger/logger').logger;
 
 const logger = log.getLogger('AppApi');
 const vcxroom = require('./vcxroom');
-
-const basic = auth.basic({
-  realm: 'Private Area.',
-  file: 'files/users.htpasswd',
-});
 
 // Initialization of basic HTTP / HTTPS Service
 const options = {
@@ -109,30 +101,16 @@ app.post('/api/create-token/', (req, res) => {
 
 // Route: To create a Room (1to1)
 app.post('/api/create-room/', (req, res) => {
-  const user = basicAuth(req);
-  if (vcxutil.validAuthInvite(user, basic)) { // Here you need some logic to validate authentication
-    vcxroom.createRoom((status, data) => {
-      res.send(data);
-      res.status(200);
-    });
-  } else {
-    res.set({
-      'WWW-Authenticate': 'Basic realm="simple-admin"',
-    }).send(401);
-  }
+  vcxroom.createRoom((status, data) => {
+    res.send(data);
+    res.status(200);
+  });
 });
 
 // Route: To create a Room (multiparty)
 app.post('/api/room/multi/', (req, res) => {
-  const user = basicAuth(req);
-  if (vcxutil.validAuthInvite(user, basic)) { // Here you need some logic to validate authentication
-    vcxroom.createRoomMulti((status, data) => {
-      res.send(data);
-      res.status(200);
-    });
-  } else {
-    res.set({
-      'WWW-Authenticate': 'Basic realm="simple-admin"',
-    }).send(401);
-  }
+  vcxroom.createRoomMulti((status, data) => {
+    res.send(data);
+    res.status(200);
+  });
 });
