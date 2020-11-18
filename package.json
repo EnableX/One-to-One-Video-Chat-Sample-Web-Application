@@ -1,5 +1,5 @@
 {
-  "name": "EnableX-One-to-One-Video-Conference-NodeJS-Application",
+  "name": "One-to-One-Video-Chat-Sample-Web-Application",
   "version": "1.0.1",
   "description": "Sample Application to enable developers to understand how to build applications using EnableX Video API.",
   "keywords": [
@@ -20,14 +20,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "basic-auth": "^2.0.1",
     "body-parser": "^1.19.0",
-    "btoa": "^1.1.2",
-    "debug": "^4.1.1",
+    "btoa": "^1.2.1",
     "dotenv": "^8.2.0",
-    "express": "^4.16.2",
-    "http-auth": "^3.2.3",
-    "log4js": "^4.5.1",
-    "morgan": "^1.9.0"
+    "express": "^4.17.1",
+    "log4js": "^6.3.0"
   }
 }

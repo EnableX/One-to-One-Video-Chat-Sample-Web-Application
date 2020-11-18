@@ -15,6 +15,7 @@ const roomObj = {
   name: 'room for one to one video meeting',
   owner_ref: 'one to one github sample',
   settings: {
+    description: 'One-to-One-Video-Chat-Sample-Web-Application',
     scheduled: false,
     adhoc: true,
     moderators: '1',
@@ -30,6 +31,7 @@ const multiPartyRoomObj = {
   name: 'room for multiparty video meeting',
   owner_ref: 'multiparty github sample',
   settings: {
+    description: 'One-to-One-Video-Chat-Sample-Web-Application',
     scheduled: false,
     adhoc: true,
     moderators: '1',
@@ -53,7 +55,7 @@ const options = {
 };
 
 // Function: To get Token for a Room
-vcxroom.getToken = function getToken(details, callback) {
+vcxroom.getToken = (details, callback) => {
   options.path = `/v1/rooms/${details.roomId}/tokens`;
   options.method = 'POST';
   options.headers = {
@@ -71,7 +73,7 @@ vcxroom.getToken = function getToken(details, callback) {
 };
 
 // Function: To get a list of Rooms
-vcxroom.getAllRooms = function getAllRooms(callback) {
+vcxroom.getAllRooms = (callback) => {
   options.path = '/v1/rooms/';
   options.method = 'GET';
   vcxutil.connectServer(options, null, (status, data) => {
@@ -80,7 +82,7 @@ vcxroom.getAllRooms = function getAllRooms(callback) {
 };
 
 // Function: To get information of a Room
-vcxroom.getRoom = function getRoom(roomName, callback) {
+vcxroom.getRoom = (roomName, callback) => {
   options.path = `/v1/rooms/${roomName}`;
   options.method = 'GET';
   vcxutil.connectServer(options, null, (status, data) => {
@@ -93,7 +95,7 @@ vcxroom.getRoom = function getRoom(roomName, callback) {
 };
 
 // Function: To create Room
-vcxroom.createRoom = function createRoom(callback) {
+vcxroom.createRoom = (callback) => {
   const roomMeta = roomObj;
   options.path = '/v1/rooms/';
   options.method = 'POST';
@@ -111,7 +113,7 @@ vcxroom.createRoom = function createRoom(callback) {
 };
 
 // Function: To create Room
-vcxroom.createRoomMulti = function createRoom(callback) {
+vcxroom.createRoomMulti = (callback) => {
   const roomMeta = multiPartyRoomObj;
   options.path = '/v1/rooms/';
   options.method = 'POST';

@@ -1,8 +1,13 @@
+/// ////////////////////////////////////////////////////
+//
+// File: server.js
+// This is the Service File - executable using node command
+//
+/// //////////////////////////////////////////////////
+
 const express = require('express');
 const https = require('https');
 const fs = require('fs');
-const morgan = require('morgan');
-const debug = require('debug')('vcloudx-server-api:server');
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -17,12 +22,13 @@ const options = {
   key: fs.readFileSync(process.env.CERTIFICATE_SSL_KEY).toString(),
   cert: fs.readFileSync(process.env.CERTIFICATE_SSL_CERT).toString(),
 };
-if (process.env.CERTIFICATE_SSL_CACERTS) {
+if (process.env.CERTIFICATE_SSLCACERTS) {
   options.ca = [];
-  options.ca.push(fs.readFileSync(process.env.CERTIFICATE_SSL_CACERTS).toString());
+  process.env.CERTIFICATE_SSLCACERTS.forEach((sslCaCert) => {
+    options.ca.push(fs.readFileSync(sslCaCert).toString());
+  });
 }
 const server = https.createServer(options, app);
-
 const port = process.env.SERVICE_PORT || 5000;
 
 // Start the Service
@@ -58,7 +64,7 @@ function onListening() {
   const bind = typeof addr === 'string'
     ? `pipe ${addr}`
     : `port ${addr.port}`;
-  debug(`Listening on ${bind}`);
+  console.log(`Listening on ${bind}`);
 }
 
 logger.info(`Server started. Listening on Port ${port}`);
@@ -70,7 +76,6 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
   extended: true,
 }));
 
-app.use(morgan('dev'));
 app.use(express.static('../client'));
 
 // Application Server Route Definitions - These functions communicate with EnableX Server API
@@ -82,6 +87,7 @@ app.get('/api/get-all-rooms', (req, res) => {
   });
 });
 
+// Application Server Route Definitions - These functions communicate with EnableX Server API
 // Route: To get information of a given room.
 app.get('/api/get-room/:roomName', (req, res) => {
   const { roomName } = req.params;
