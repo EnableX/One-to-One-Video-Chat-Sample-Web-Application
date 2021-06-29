@@ -40,7 +40,7 @@ Prerequisite: latest version of `Node.js` and `git` Installed
 
 ### 4.2 Step by Step process to configure and run the app (Jump to point 5. if you have followed 4.1)
 
-#### 4.2.1 SSL Certificates or Self-Signed Certificates
+#### 4.2.1 Clone project repository
 
 * Clone this repository `git clone https://github.com/EnableX/One-to-One-Video-Chat-Sample-Web-Application.git --recursive`
 ### ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) Please note `--recursive` option. Repo should be cloned recursively to download `client` app. 
