@@ -20,19 +20,32 @@ When developing a Client Application with EnxRtc.js make sure to include the upd
 Sign up for a free trial https://portal.enablex.io/cpaas/trial-sign-up/ or try our multiparty video chat https://try.enablex.io/
 
 
-## 3. Installation
+## 3. Pre-Requisites
 
-### 3.1 Pre-Requisites
-
-#### 3.1.1 App Id and App Key
+### 3.1 App Id and App Key
 
 * Register with EnableX [https://portal.enablex.io/cpaas/trial-sign-up/] 
 * Create your Application
 * Get your App ID and App Key
+
+## 4. Installation
+
+### 4.1 Configure and run the app using Script
+Prerequisite: latest version of `Node.js` and `git` Installed
+* Downloads bash script file script.sh (https://github.com/ashutoshmishraji/One-to-One-Video-Chat-Sample-Web-Application/blob/master/script.sh)
+* Make it executable in linux terminal  Using  this command "sudo chmod +x script.sh"
+* And just type ./script.sh ( In same directory where your script.sh present)
+* Give the information about configuration 
+* That's it , You will see `localhost` listening to `port` you provided while setting up.
+
+### 4.2 Step by Step process to configure and run the app (Jump to point 5. if you have followed 4.1)
+
+#### 4.2.1 SSL Certificates or Self-Signed Certificates
+
 * Clone this repository `git clone https://github.com/EnableX/One-to-One-Video-Chat-Sample-Web-Application.git --recursive`
 ### ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) Please note `--recursive` option. Repo should be cloned recursively to download `client` app. 
 
-#### 3.1.2 SSL Certificates or Self-Signed Certificates
+#### 4.2.2 SSL Certificates or Self-Signed Certificates
 
 The Application needs to run on https. So, you need to use a valid SSL Certificate for your Domain and point your application to use them.
 
@@ -52,7 +65,7 @@ The following below can also be used to create a self-signed certificate.
   cd ..
 ```
 
-#### 3.1.3 Configure
+#### 4.2.3 Configure
 
 Before you can run this application, configure the service. Copy the `server/example.env` as `server/.env` and update the values. Or you can set following system environment variables instead:
 
@@ -76,11 +89,11 @@ On Windows, open a powershell / command window and type the following commands. 
   setx ENABLEX_APP_KEY 'XXXXXXXXX'
 ```
 
-### 3.2 Build
+### 4.2.4 Build
 
 Run `npm install` to build the project and the build artifacts will be stored in the `./node_modules` directory.
 
-#### 3.2.1 Run Server
+### 4.2.5 Run Server
 
 Run `node server.js` inside `server` folder to start your server.
 ```javascript
@@ -90,18 +103,7 @@ Run `node server.js` inside `server` folder to start your server.
 Server started. Listening on Port 5000
 
 
-#### 3.2.2 Configure And Run the app Using BASH Script 
-Prerequisite: latest version of Node js , git Installed And you have Enablex App ID and KeyI
-* Downloads bash script file script.sh (https://github.com/ashutoshmishraji/One-to-One-Video-Chat-Sample-Web-Application/blob/master/script.sh)
-* Make it executable in linux terminal  Using  this command "sudo chmod +x script.sh"
-* And just type ./script.sh ( In same directory where your script.sh present)
-* Give the information about configuration 
-* That's it , You will see Localhost listening to Port
-* Awesome Your application is ready to explore
-
-
-
-#### 3.2.3 Test Video Call
+## 5. Test Video Call
 
 * Open a browser and go to `https://yourdomain:5000/`. The browser should load the App. Go to -> Advanced -> Proceed to localhost
 * Don't have a Room ID? Create here (create a new RoomID)
@@ -113,8 +115,7 @@ Prerequisite: latest version of Node js , git Installed And you have Enablex App
 * Now, you should see your own video in both the tabs!
 
 
-
-## 4. Server API
+## 6. Server API
 
 EnableX Server API is a Rest API service meant to be called from Partners' Application Server to provision video enabled
 meeting rooms. API Access is given to each Application through the assigned App ID and App Key. So, the App ID and App Key
@@ -128,7 +129,7 @@ To know more about Server API, go to:
 https://developer.enablex.io/video-api/server-api/
 
 
-## 5. Client API
+## 7. Client API
 
 Client End Point Application uses Web Toolkit EnxRtc.js to communicate with EnableX Servers to initiate and manage RTC Communications.
 
