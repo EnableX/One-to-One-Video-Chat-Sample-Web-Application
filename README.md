@@ -29,6 +29,9 @@ Sign up for a free trial https://portal.enablex.io/cpaas/trial-sign-up/ or try o
 * Get your App ID and App Key
 
 ## 4. Installation
+Two methods are provided 
+- Setup everything using script or
+- Follow step by step instructions to setup
 
 ### 4.1 Configure and run the app using Script
 Prerequisite: latest version of `Node.js` and `git` Installed
