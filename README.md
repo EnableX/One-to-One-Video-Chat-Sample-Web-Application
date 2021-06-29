@@ -89,7 +89,17 @@ Run `node server.js` inside `server` folder to start your server.
 ```
 Server started. Listening on Port 5000
 
-#### 3.2.2 Test Video Call
+
+#### 3.2.2 Configure And Run the app Using BASH Script 
+Prerequisite: latest version of Node js , git Installed And you have Enablex App ID and KeyI
+* Downloads bash script file script.sh 
+* Make it executable in linux terminal  Using  this command "sudo chmod +x script.sh"
+* And just type ./script.sh ( In same directory where your script.sh present)
+* Give the information about configuration 
+* That's it , You will see Localhost listening to Port
+* Awesome Your application is ready to explore
+
+#### 3.2.3 Test Video Call
 
 * Open a browser and go to `https://yourdomain:5000/`. The browser should load the App. Go to -> Advanced -> Proceed to localhost
 * Don't have a Room ID? Create here (create a new RoomID)
@@ -99,6 +109,7 @@ Server started. Listening on Port 5000
 * Open another browser tab and enter `https://yourdomain:5000/`
 * Enter the same roomID previously created and add a different username (test1) and click join
 * Now, you should see your own video in both the tabs!
+
 
 
 ## 4. Server API
