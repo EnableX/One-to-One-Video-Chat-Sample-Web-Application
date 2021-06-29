@@ -92,12 +92,14 @@ Server started. Listening on Port 5000
 
 #### 3.2.2 Configure And Run the app Using BASH Script 
 Prerequisite: latest version of Node js , git Installed And you have Enablex App ID and KeyI
-* Downloads bash script file script.sh 
+* Downloads bash script file script.sh (https://github.com/ashutoshmishraji/One-to-One-Video-Chat-Sample-Web-Application/blob/master/script.sh)
 * Make it executable in linux terminal  Using  this command "sudo chmod +x script.sh"
 * And just type ./script.sh ( In same directory where your script.sh present)
 * Give the information about configuration 
 * That's it , You will see Localhost listening to Port
 * Awesome Your application is ready to explore
+
+
 
 #### 3.2.3 Test Video Call
 
