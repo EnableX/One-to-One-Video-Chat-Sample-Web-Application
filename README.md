@@ -35,9 +35,9 @@ Two methods are provided
 
 ### 4.1 Configure and run the app using Script
 Prerequisite: latest version of `Node.js` and `git` Installed
-* Downloads bash script file script.sh (https://github.com/ashutoshmishraji/One-to-One-Video-Chat-Sample-Web-Application/blob/master/script.sh)
-* Make it executable in linux terminal  Using  this command "sudo chmod +x script.sh"
-* And just type ./script.sh ( In same directory where your script.sh present)
+* Downloads bash script file `script.sh` (https://github.com/EnableX/One-to-One-Video-Chat-Sample-Web-Application/blob/master/script.sh)
+* Make it executable in linux terminal  Using  this command `sudo chmod +x script.sh`
+* And just type `./script.sh` ( In same directory where your script.sh present)
 * Give the information about configuration 
 * That's it , You will see `localhost` listening to `port` you provided while setting up.
 
