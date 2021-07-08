@@ -12,7 +12,7 @@ https://developer.enablex.io/video/browser-compatibility-of-enablex-video/
 
 ## 1. Important!
 
-When developing a Client Application with EnxRtc.js make sure to include the updated EnxRtc.js polyfills from https://developer.enablex.io/video-api/client-api/web-toolkit/ for RTCPeerConnection and getUserMedia. Otherwise your application will not work in web browsers.
+When developing a Client Application with EnxRtc.js ( present in client/js ), make sure to replace the old EnxRtc.js with updated EnxRtc.js polyfills from https://developer.enablex.io/video-api/client-api/web-toolkit/ for RTCPeerConnection and getUserMedia. Otherwise your application will not work in web browsers.
 
 
 ## 2. Trial
@@ -25,8 +25,8 @@ Sign up for a free trial https://portal.enablex.io/cpaas/trial-sign-up/ or try o
 ### 3.1 App Id and App Key
 
 * Register with EnableX [https://portal.enablex.io/cpaas/trial-sign-up/] 
-* Create your Application
-* Get your App ID and App Key
+* Create your Project
+* Get your App ID and App Key for that project
 
 ## 4. Installation
 Two methods are provided 
@@ -59,6 +59,9 @@ However you may use self-signed Certificate to run this application locally. The
 * https://www.akadia.com/services/ssh_test_certificate.html
 
 The following below can also be used to create a self-signed certificate.
+
+For Mac/Linux
+
 ```javascript
   cd One-to-One-Video-Chat-Sample-Web-Application
   cd server
@@ -67,7 +70,16 @@ The following below can also be used to create a self-signed certificate.
   sudo chmod 755 ./certs/example.*
   cd ..
 ```
+For Windows (Use Git Bash)
 
+```javascript
+  cd One-to-One-Video-Chat-Sample-Web-Application
+  cd server
+  mkdir certs
+  openssl req -x509 -newkey rsa:4096 -keyout ./certs/example.key -out ./certs/example.crt -days 10000 -nodes
+  chmod 755 ./certs/example.*
+  cd ..
+```
 #### 4.2.3 Configure
 
 Before you can run this application, configure the service. Copy the `server/example.env` as `server/.env` and update the values. Or you can set following system environment variables instead:
@@ -108,13 +120,13 @@ Server started. Listening on Port 5000
 
 ## 5. Test Video Call
 
-* Open a browser and go to `https://yourdomain:5000/`. The browser should load the App. Go to -> Advanced -> Proceed to localhost
+* Open a browser and go to `https://localhost:5000/`. The browser should load the App. Go to -> Advanced -> Proceed to localhost
 * Don't have a Room ID? Create here (create a new RoomID)
 * Store the Room ID for future use or share
-* Enter a username (e.g. test0)
+* Enter a username (e.g. test0) as a moderator
 * Join and allow access to camera and microphone when prompted to start your first webRTC call through EnableX
-* Open another browser tab and enter `https://yourdomain:5000/`
-* Enter the same roomID previously created and add a different username (test1) and click join
+* Open another browser tab and enter `https://localhost:5000/`
+* Enter the same roomID previously created and add a different username (test1) as a participant and click join
 * Now, you should see your own video in both the tabs!
 
 
