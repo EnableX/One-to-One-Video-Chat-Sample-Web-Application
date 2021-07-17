@@ -76,7 +76,7 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
   extended: true,
 }));
 
-app.use(express.static('../client'));
+app.use(express.static('../public'));
 
 // Application Server Route Definitions - These functions communicate with EnableX Server API
 // Route: To get liist of all Rooms in your Application
