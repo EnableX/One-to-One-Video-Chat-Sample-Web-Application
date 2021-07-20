@@ -11180,7 +11180,12 @@ span.nav-link {
 #frame .content .message-input .wrap button:focus {
   outline: none;
 }
-
+#canvasStreamPlayer{
+  height: 323px !important;
+  width: 623px !important;
+  right: 150px !important;
+  object-fit: contain !important;
+}
 .vcx_player {
   height: 100%;
   overflow: hidden;

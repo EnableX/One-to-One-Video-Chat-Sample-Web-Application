@@ -11,95 +11,110 @@
     <link rel="stylesheet" href="./assets/plugins/bootstrap4/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./assets/plugins/themify-icons/themify-icons.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <link href="./css/core.css" rel="stylesheet" />
 </head>
 
 <body class="img-cover" style="overflow: hidden;">
-<div id="overlay" style="display: none;">
-    <div class="loader" style="width: 50px;">
-        <img src="./img/loading.gif" />
-    </div>
-</div>
-
-
-
-<!--body wrapper start-->
-<div class="row" id="call_container_div">
-    <div class="call-top-header">
-        <div class="logo" style="padding-top: 8px;">
-            <img src="./img/enableX_logo.png" style="max-width: 160px;" />
+    <div id="overlay" style="display: none;">
+        <div class="loader" style="width: 50px;">
+            <img src="./img/loading.gif" />
         </div>
     </div>
 
-    <div class="col-md-12 col-sm-12 px-0 mx-0">
-        <div class="local_class_peep" id="local_view">
-            <div id="self-view"></div>
-            <div class="self-name"></div>
-        </div>
-        <div class="remote_class_peep" id="remote_view">
 
-            <div id="call_div"></div>
-            <div id="show_stream_div"></div>
 
-            <div class="remote-name"></div>
-        </div>
-
-        <div class="toolbar-buttons">
-            <div class="tools">
-                <div class="mute-icon" id="mute_audio" title="Mute/Unmute Audio" style="cursor: pointer;">
-                    <i class="fa fa-microphone" id="self_aMute"></i>
-                </div>
-                <div class="video-mute-icon" id="mute_video" title="Mute/Unmute Video" style="cursor: pointer;">
-                    <i class="fa fa-video" id="self_vMute"></i>
-                </div>
-                <div class="video-mute-icon" id="share_screen_btn" title="Start Share" style="cursor: pointer;">
-                    <i class="fa fa-desktop fa-fw SSicon" onClick="screenShare()"></i>
-                </div>
-                <div class="video-mute-icon" id="toggle_chat" title="Chat" style="cursor: pointer; position: relative;">
-                    <i class="fas fa-comment-dots fa-fw CBicon" onClick="toggleChat()"></i>
-                    <span class="tag tag-danger top" id="chat-tag" style="display: none; left: 25px;">&nbsp;</span>
-                </div>
-                <div class="video-mute-icon" title="End Call" style="cursor: pointer; background: red;">
-                    <i class="fas fa-phone fa-fw CBicon" id="disconnect_call" style="margin-left: -20px;"></i>
-                </div>
-
+    <!--body wrapper start-->
+    <div class="row" id="call_container_div">
+        <div class="call-top-header">
+            <div class="logo" style="padding-top: 8px;">
+                <img src="./img/enableX_logo.png" style="max-width: 160px;" />
             </div>
         </div>
-        <div id="chat_window-popup">
-            <div class="card" id="chat_container">
-                <div class="card-header text-uppercase"><b>Chat</b></div>
-                <div class="items-list">
-                    <div id="frame">
-                        <div class="content" id="chat-window">
-                            <div class="messages">
-                                <ul class="chat-message" id="chat-message"></ul>
+
+        <div id="white_b" style="position: relative; top:100px;left: 500px ;display: none;top: 52px;left: 400px;">
+
+            <canvas id="wb"></canvas>
+        </div>
+        <div class="col-md-3" style="position: absolute;bottom: 200px;left: 580px;">
+
+            <div id="canvasStreamPlayer"></div>
+        </div>
+
+        <div class="col-md-12 col-sm-12 px-0 mx-0">
+            <div class="local_class_peep" id="local_view">
+                <div id="self-view"></div>
+                <div class="self-name"></div>
+            </div>
+            <div class="remote_class_peep" id="remote_view">
+
+                <div id="call_div"></div>
+                <div id="show_stream_div"></div>
+
+                <div class="remote-name"></div>
+            </div>
+
+            <div class="toolbar-buttons" style="position: fixed;">
+                <div class="tools">
+                    <div class="mute-icon" id="mute_audio" title="Mute/Unmute Audio" style="cursor: pointer;">
+                        <i class="fa fa-microphone" id="self_aMute"></i>
+                    </div>
+                    <div class="video-mute-icon" id="mute_video" title="Mute/Unmute Video" style="cursor: pointer;">
+                        <i class="fa fa-video" id="self_vMute"></i>
+                    </div>
+                    <div class="video-mute-icon" id="share_screen_btn" title="Start Share" style="cursor: pointer;">
+                        <i class="fa fa-desktop fa-fw SSicon" onClick="screenShare()"></i>
+                    </div>
+                    <div class="video-mute-icon" id="toggle_chat" title="Chat"
+                        style="cursor: pointer; position: relative;">
+                        <i class="fas fa-comment-dots fa-fw CBicon" onClick="toggleChat()"></i>
+                        <span class="tag tag-danger top" id="chat-tag" style="display: none; left: 25px;">&nbsp;</span>
+                    </div>
+                    <div class="video-mute-icon" id="white_board_btn" title="Start Whiteboard" style="cursor: pointer;">
+                        <img src="https://img.icons8.com/ios/50/000000/whiteboard.png" onClick="whiteboard()">
+                    </div>
+                    <div class="video-mute-icon" title="End Call" style="cursor: pointer; background: red;">
+                        <i class="fas fa-phone fa-fw CBicon" id="disconnect_call" style="margin-left: -20px;"></i>
+                    </div>
+
+                </div>
+            </div>
+            <div id="chat_window-popup">
+                <div class="card" id="chat_container">
+                    <div class="card-header text-uppercase"><b>Chat</b></div>
+                    <div class="items-list">
+                        <div id="frame">
+                            <div class="content" id="chat-window">
+                                <div class="messages">
+                                    <ul class="chat-message" id="chat-message"></ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-block">
-                    <textarea class="form-control" name="" id="chat-text-area" onkeyup="sendChat(event)"></textarea>
+                    <div class="card-block">
+                        <textarea class="form-control" name="" id="chat-text-area" onkeyup="sendChat(event)"></textarea>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Placed js at the end of the document so the pages load faster -->
-<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="js/tether.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
 
+    <!-- Placed js at the end of the document so the pages load faster -->
 
-<script type="text/javascript" src="assets/plugins/jscrollpane/jquery.mousewheel.js"></script>
-<script type="text/javascript" src="assets/plugins/jscrollpane/mwheelIntent.js"></script>
-
-
-<script type="text/javascript" src="js/scrollbar.js"></script>
-<script type="text/javascript" src="js/EnxRtc.js"></script>
-<script type="text/javascript" src="../config.js"></script>
-<script type="text/javascript" src="js/confo.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/tether.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/plugins/jscrollpane/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="assets/plugins/jscrollpane/mwheelIntent.js"></script>
+    <script type="text/javascript" src="js/scrollbar.js"></script>
+    <script type="text/javascript" src="js/EnxWb.js"></script>
+    <script type="text/javascript" src="js/EnxRtc.js"></script>
+    <script type="text/javascript" src="../config.js"></script>
+    <script type="text/javascript" src="js/confo.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
+    <script type="text/javascript" src="js/jquery.toast.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
 
 </body>
 
