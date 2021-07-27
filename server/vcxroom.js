@@ -23,6 +23,7 @@ const roomObj = {
     duration: '30',
     quality: 'SD',
     auto_recording: false,
+    canvas: true
   },
 };
 
@@ -39,6 +40,7 @@ const multiPartyRoomObj = {
     duration: '30',
     quality: 'SD',
     auto_recording: false,
+    canvas: true
   },
 };
 

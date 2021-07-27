@@ -11180,7 +11180,16 @@ span.nav-link {
 #frame .content .message-input .wrap button:focus {
   outline: none;
 }
-
+/* .img-cover{
+  background-color: #fff;
+} */
+#canvasStreamPlayer{
+  height: 323px !important;
+  width: 623px !important;
+  right: 582px !important;
+  object-fit: contain !important;
+  display: none;
+}
 .vcx_player {
   height: 100%;
   overflow: hidden;
@@ -11323,7 +11332,11 @@ div#enable_stats {
 .img-circle {
   border-radius: 50%;
 }
-
+#show_stream_div{
+  height: auto !important;
+  width: auto !important;
+  top: 132px!important;
+}
 .call-top-header {
   display: flex;
   flex-direction: row;
