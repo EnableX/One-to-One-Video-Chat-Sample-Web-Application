@@ -271,8 +271,13 @@ function ConnectCall(token) {
 
                         isModerator = room.me.role == "moderator" ? true : false;
                         if (!isModerator) {
-                            document.querySelector('#local_view').style.display = 'none';
-                            document.querySelector('#remote_view').style.display = 'none';
+                            document.querySelector('#local_view').style.height = '600px';
+                            document.querySelector('#local_view').style.width = '450px';
+                            document.querySelector('#local_view').style.float = 'right';
+                            document.querySelector('#remote_view').style.width = '450px';
+                            document.querySelector('#remote_view').style.height = '600px';
+                            document.querySelector('#remote_view').style.float = 'right';
+
                             document.querySelector('#canvasStreamPlayer').style.display = 'block';
                         }
 
@@ -291,8 +296,12 @@ function ConnectCall(token) {
                 if (!isModerator) {
                     document.querySelector("#canvasStreamPlayer").innerHTML = "";
                     document.querySelector("#canvasStreamPlayer").style.border = "none";
-                    document.querySelector('#local_view').style.display = '';
-                    document.querySelector('#remote_view').style.display = '';
+                    document.querySelector('#local_view').style.height = '';
+                    document.querySelector('#local_view').style.width = '';
+                    document.querySelector('#local_view').style.float = '';
+                    document.querySelector('#remote_view').style.width = '';
+                    document.querySelector('#remote_view').style.height = '';
+                    document.querySelector('#remote_view').style.float = '';
                 }
 
             });
@@ -341,7 +350,6 @@ function ConnectCall(token) {
 
             room.addEventListener("share-started", function (event) {
                 toggle_case = true;
-                document.getElementById('startStreaming').disabled = true;
                 var ua = navigator.userAgent.toLowerCase();
                 var ConfigSpecs = {
                     maxVideoBW: 120,
@@ -354,7 +362,7 @@ function ConnectCall(token) {
                 var clientId = event.message.clientId;
                 if (presentationStarted == false && desktop_shared == false) {
                     if (shareStream == null) {
-                        var st = room.remoteStreams.get(11);
+                        var st = room.remoteStreams.get(101);
                         if (st.stream !== undefined) {
                             presentationStarted = true;
                             shareStart = true;
@@ -368,7 +376,6 @@ function ConnectCall(token) {
             room.addEventListener("share-stopped", function (event) {
                 toggle_case = false;
 
-                document.getElementById('startStreaming').disabled = false;
                 var ua = navigator.userAgent.toLowerCase();
                 var ConfigSpecs = {
                     maxVideoBW: 0,
@@ -480,7 +487,6 @@ function whiteboard() {
         document.querySelector('#white_b').style.display = '';
         if (check_one_obj === 1) { wbObject.create(room); check_one_obj = 0; }
         if (toggle_case === true) {
-            document.getElementById('startStreaming').disabled = true;
             alert("You can't use both streaming and screen sharing concurrently.")
         }
         toggle_board = 1;
