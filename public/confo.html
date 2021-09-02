@@ -32,6 +32,15 @@
             <img src="./img/enableX_logo.png" style="max-width: 160px;" />
         </div>
     </div>
+    
+    <div class="device_container" style="display: none ;width: 450px;position: absolute;right: 0px;background-color: white; z-index: 1000000000000000;">
+        <h4 class="h_miclist">Mic List</h4>
+        <!-- <ul class="miclist" style="display: flex;flex-direction: column;"></ul> -->
+        <div class="miclist"></div>
+        <br>
+        <h4 class="h_cameralist">Camera List</h4>
+        <div class="cameralist"></div>
+    </div>
 
     <div class="col-md-12 col-sm-12 px-0 mx-0">
         <div class="local_class_peep" id="local_view">
@@ -39,13 +48,12 @@
             <div class="self-name"></div>
         </div>
         <div class="remote_class_peep" id="remote_view">
-
+            
             <div id="call_div"></div>
             <div id="show_stream_div"></div>
-
+            
             <div class="remote-name"></div>
         </div>
-
         <div class="toolbar-buttons">
             <div class="tools">
                 <div class="mute-icon" id="mute_audio" title="Mute/Unmute Audio" style="cursor: pointer;">
@@ -61,10 +69,12 @@
                     <i class="fas fa-comment-dots fa-fw CBicon" onClick="toggleChat()"></i>
                     <span class="tag tag-danger top" id="chat-tag" style="display: none; left: 25px;">&nbsp;</span>
                 </div>
+                <div class="video-mute-icon" id="mic_cam_list" title="Mic_Cam List" style="cursor: pointer; background: white;">
+                    <img src="https://img.icons8.com/ios/50/000000/ellipsis.png" onclick="miclist()"/>
+                </div>
                 <div class="video-mute-icon" title="End Call" style="cursor: pointer; background: red;">
                     <i class="fas fa-phone fa-fw CBicon" id="disconnect_call" style="margin-left: -20px;"></i>
                 </div>
-
             </div>
         </div>
         <div id="chat_window-popup">
@@ -96,6 +106,7 @@
 <script type="text/javascript" src="assets/plugins/jscrollpane/mwheelIntent.js"></script>
 
 
+<!-- <script type="text/javascript" src="js/EnxRtc.js.map"></script> -->
 <script type="text/javascript" src="js/scrollbar.js"></script>
 <script type="text/javascript" src="js/EnxRtc.js"></script>
 <script type="text/javascript" src="../config.js"></script>
